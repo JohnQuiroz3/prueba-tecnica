@@ -1,0 +1,46 @@
+<div class="col-md-6 mx-auto my-5 py-5">
+    <span class="anchor" id="nuevoProducto"></span>
+    <div class="card card-outline-secondary">
+        <div class="card-header">
+            <h3 class="mb-0">Editar Producto {{producto.nombre}}</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="fg"
+            (ngSubmit)="guardar(fg.controls['id'].value, fg.controls['nombre'].value, fg.controls['inventario'].value, fg.controls['compra'].value, fg.controls['venta'].value)">
+                <div class="form-group mb-2 row">
+                    <label for="id" class="col-md-3 col-form-label">Identificación</label>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" name="id" [formControl]="fg.controls['id']" readonly required>
+                    </div>
+                </div>
+                <div class="form-group mb-2 row">
+                    <label for="nombre" class="col-md-3 col-form-label">Nombre</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="nombre" [formControl]="fg.controls['nombre']" required>
+                    </div>
+                </div>
+                <div class="form-group mb-2 row">
+                    <label for="inventario" class="col-md-3 col-form-label">Inventario</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="inventario" [formControl]="fg.controls['inventario']" required>
+                    </div>
+                </div>
+                <div class="form-group mb-2 row">
+                    <label for="compra" class="col-md-3 col-form-label">Precio de compra</label>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" name="compra" [formControl]="fg.controls['compra']" required>
+                    </div>
+                </div>
+                <div class="form-group mb-2 row">
+                    <label for="venta" class="col-md-3 col-form-label">Venta</label>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" name="venta" [formControl]="fg.controls['venta']" required>
+                    </div>
+                </div>
+                <div class="form-group mb-2 row" *ngIf="!fg.valid">Debe ingresar todos los datos solicitados para continuar</div>
+                <button class="btn btn-primary" type="submit" *ngIf="fg.valid">Guardar</button>
+                <!-- <button [routerLink]="['/productos']" class="btn btn-primary" type="submit" (click)="guardar(id.value, nombre.value, inventario.value, compra.value, venta.value)">Guardar</button> -->
+            </form>
+        </div>
+    </div>
+</div>

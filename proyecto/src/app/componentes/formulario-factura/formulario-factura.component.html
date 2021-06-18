@@ -1,0 +1,112 @@
+<div class="col-md-10 mx-auto my-5 py-5">
+    <span class="anchor" id="nuevaFactura"></span>
+    <div class="card card-outline-secondary">
+        <div class="card-header">
+            <h3 class="mb-0">Nueva Factura</h3>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group mb-2 row">
+                    <label for="fecha" class="col-md-3 col-form-label">Fecha</label>
+                    <div class="col-md-9">
+                        <input type="date" class="form-control" id="fecha" #fecha>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-row mb-2 row align-items-center">
+                    <div class="col-md-4 mb-2">
+                        <label for="idCliente" class="col-form-label mb-2">Identificación del Cliente</label>
+                        <input type="number" class="form-control" id="idCliente" placeholder="Ingrese la cédula del cliente..." #idCliente>
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <button class="btn btn-primary" (click)="buscarCliente(idCliente.value)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="col-auto mb-2">
+                        <label for="nombre" class="col-form-label mb-2">Nombre del Cliente</label>
+                        <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="nombreCliente" readonly>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-row mb-2 row align-items-center">
+                    <div class="col-auto mb-2">
+                        <label for="idProducto" class="col-form-label mb-2">Identificación del Producto</label>
+                        <input type="number" class="form-control" id="idProducto" placeholder="Ingrese la identificación del producto..." #idProducto>
+                    </div>
+                    <div class="col-auto mb-2">
+                        <button class="btn btn-primary" (click)="buscarProducto(idProducto.value)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="col-auto mb-2">
+                        <label for="nombreProducto" class="col-form-label mb-2">Nombre del Producto</label>
+                        <input type="text" class="form-control" name="nombreP" #nombreP="ngModel" [(ngModel)]="nombreProducto" readonly>
+                    </div>
+                    <div class="col-auto mb-2">
+                        <label for="cantidad" class="col-form-label mb-2">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidad" placeholder="Ingrese la cantidad vendida del producto..." #cantidad>
+                    </div>
+                    <div class="col-auto mb-2">
+                        <button class="btn btn-primary" (click)="agregarProducto(idProducto.value, cantidad.value)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group mb-2 row table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio Venta</th>
+                                <th scope="col">Precio Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let d of detalle">
+                                <th scope="row">{{d.id}}</th>
+                                <td>{{d.nombre}}</td>
+                                <td>{{d.cantidad}}</td>
+                                <td>{{d.venta}}</td>
+                                <td>{{d.totalproducto}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-primary" type="submit" (click)="facturar(fecha.value, idCliente.value)">Facturar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- <form [formGroup]="fg">
+    <div class="form-group centrado">
+        <label>Factura número {{numero}}</label>
+        <div class="row col-md-6">
+            <label for="fecha">Fecha</label>
+            <input type="date" class="form-control" id="fecha" placeholder="Ingrese la fecha de facturación..." [formControl]="fg.controls['fecha']">
+        </div>
+        <div class="row col-md-6">
+            <label for="idCliente">Identificación del Cliente</label>
+            <input type="number" class="form-control" id="idCliente" placeholder="Ingrese la cédula del cliente..." [formControl]="fg.controls['cliente']">
+            <label>{{nombreCliente}}</label>
+        </div>
+        <div class="row col-md-6">
+            <label for="fecha">Identificación del Producto</label>
+            <input type="number" class="form-control" id="idProducto" placeholder="Ingrese la identificación del producto..." [formControl]="fg.controls['producto']">
+            <label>{{nombreProducto}}</label>
+        </div>
+        <div class="row col-md-6">
+            <label for="fecha">Cantidad</label>
+            <input type="date" class="form-control" id="cantidad" placeholder="Ingrese la cantidad vendida del producto..." [formControl]="fg.controls['cantidad']">
+        </div>
+    </div>
+</form> -->

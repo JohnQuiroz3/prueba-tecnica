@@ -1,0 +1,49 @@
+<div class="container col-md-12 mx-auto my-4">
+    <div class="row mx-auto" id="detalle">
+        <div class="row mx-auto my-4">
+            <div class="card card-outline-secondary">
+                <div class="card-header">
+                    <h3 class="mb-0">Factura número {{factura.numero}}</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group mb-2">
+                            <label for="fecha">Fecha</label>
+                            <input type="date" class="form-control" name="factura.fecha" #fecha="ngModel" [(ngModel)]="factura.fecha" readonly>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="idCliente">Nombre del Cliente</label>
+                            <input type="text" class="form-control" name="factura.cliente" #cliente="ngModel" [(ngModel)]="factura.cliente" readonly>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="fecha">Venta Total</label>
+                            <input type="number" class="form-control" name="factura.totalfactura" #totalfactura="ngModel" [(ngModel)]="factura.totalfactura" readonly>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <h1>Productos Vendidos</h1>
+        <div class="row mx-auto table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let c of lista">
+                    <tr>
+                        <th scope="row">{{c.id}}</th>
+                        <td>{{c.producto}}</td>
+                        <td>{{c.cantidad}}</td>
+                        <td>{{c.totalproducto}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary" [routerLink]="['/facturacion']">Regresar</button>
+        </div>
+    </div>
+</div>
